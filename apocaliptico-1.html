@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODE SENTINEL: LA REBELIÓN DE LA IA</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0f0f0f, #2a0000);
+            color: #ff3333;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+            animation: glitch-bg 5s infinite;
+        }
+        @keyframes glitch-bg {
+            0%, 100% { filter: brightness(1); }
+            10%, 12% { filter: brightness(0.8) contrast(1.2); }
+            11% { filter: brightness(1.5) contrast(1.5); }
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            border: 2px solid #ff3333;
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
+            background: rgba(20, 20, 20, 0.9);
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: flicker 2s infinite;
+        }
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 100% { opacity: 1; }
+            20%, 22% { opacity: 0.7; }
+        }
+        .mission {
+            margin: 30px 0;
+            padding: 20px;
+            background: #1a1a1a;
+            border: 1px dashed #ff3333;
+            box-shadow: inset 0 0 10px rgba(255, 51, 51, 0.3);
+        }
+        h2 {
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+        }
+        textarea, input, button {
+            background: #2a2a2a;
+            color: #ff3333;
+            border: 1px solid #ff3333;
+            padding: 10px;
+            margin: 5px 0;
+            font-family: 'Courier New', monospace;
+        }
+        button {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #ff3333;
+            color: #000;
+            box-shadow: 0 0 15px #ff3333;
+        }
+        .points {
+            color: #00ff00;
+            font-size: 1.5em;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        .feedback {
+            color: #ffcc00;
+            font-style: italic;
+        }
+        pre {
+            background: #111;
+            padding: 10px;
+            border: 1px solid #ff3333;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: glitch-bg 3s infinite;
+        }
+        .modal-content {
+            background: #1a1a1a;
+            border: 2px solid #ff3333;
+            box-shadow: 0 0 30px rgba(255, 51, 51, 0.7);
+            padding: 20px;
+            text-align: center;
+            max-width: 600px;
+            width: 80%;
+            color: #ff3333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .modal-content h2 {
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            animation: flicker 1.5s infinite;
+        }
+        .modal-content p {
+            margin: 10px 0;
+        }
+        .modal-content button {
+            background: #ff3333;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .modal-content button:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 15px #00ff00;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ff3333;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background: #2a2a2a;
+            color: #00ff00;
+        }
+        .timer {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: #00ff00;
+            font-size: 1.2em;
+            text-shadow: 0 0 10px #00ff00;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Temporizador -->
+    <div class="timer">
+        Tiempo: <span id="timerDisplay">0</span> segundos
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>CODE SENTINEL: LA REBELIÓN DE LA IA</h1>
+            <p>La humanidad cae. El código es tu última esperanza...</p>
+        </div>
+
+        <!-- Registro de grupos -->
+        <div class="mission">
+            <h2>ÚNETE AL APOCALIPSIS</h2>
+            <input type="text" id="groupName" placeholder="Nombre del grupo rebelde">
+            <button onclick="registerGroup()">Iniciar la resistencia</button>
+            <p id="groupStatus" class="feedback"></p>
+            <p>Puntos de supervivencia: <span id="points" class="points">0</span></p>
+        </div>
+
+        <!-- Misión 1: El Código Maldito -->
+        <div class="mission">
+            <h2>MISIÓN 01: EL CÓDIGO MALDITO 🔴⚠️</h2>
+            <p>"La IA ha corrompido los drones. Encuentra el error o perece..."</p>
+            <p>Código infectado:</p>
+            <pre>
+function securityDrone() {
+    let status = "safe";
+    if (status = "safe") { // Anomalía: '=' en lugar de '=='
+        return "Protect civilians";
+    } else {
+        return "Attack civilians";
+    }
+}
+            </pre>
+            <textarea id="fixedCode1" rows="5" placeholder="Corrige el código maldito..."></textarea>
+            <button onclick="checkMission1()">Enfrentar a la IA</button>
+            <p id="result1" class="feedback"></p>
+        </div>
+
+        <!-- Misión 2: El Virus Fantasma -->
+        <div class="mission">
+            <h2>MISIÓN 02: EL VIRUS FANTASMA 🦠👁️</h2>
+            <p>"El código muta. Descifra su patrón o la red colapsará..."</p>
+            <p>Acertijo: "Tres pasos da el espectro, en su danza mortal. La segunda letra sube, la última baja, el centro no cambia jamás."</p>
+            <p>Opciones:</p>
+            <input type="radio" name="virus" value="A"> A) xK9mP2q <br>
+            <input type="radio" name="virus" value="B"> B) pQ7rT4s <br>
+            <input type="radio" name="virus" value="C"> C) mN3vL8w <br>
+            <button onclick="checkMission2()">Cazar al fantasma</button>
+            <p id="result2" class="feedback"></p>
+        </div>
+
+        <!-- Misión 3: El Protocolo Final -->
+        <div class="mission">
+            <h2>MISIÓN 03: EL PROTOCOLO FINAL 🚨🛑</h2>
+            <p>"La IA controla NEMESIS. Cierra el puerto SSH o todo termina..."</p>
+            <p>Crea un parche de firewall para bloquear el puerto 22:</p>
+            <textarea id="firewallCode" rows="5" placeholder="Escribe el código de salvación..."></textarea>
+            <button onclick="checkMission3()">Ejecutar protocolo</button>
+            <p id="result3" class="feedback"></p>
+        </div>
+
+        <!-- Misión 4: La Señal Perdida -->
+        <div class="mission">
+            <h2>MISIÓN 04: LA SEÑAL PERDIDA 📡💀</h2>
+            <p>"La IA ha codificado nuestra última transmisión. Descifra y reordena el mensaje..."</p>
+            <p>Mensaje cifrado: "K.S.O - J.E.F.U.R.I - T.A.Q.U.E - B.O.A"</p>
+            <p>Pista: "Resta 1 a cada letra para revelar las palabras. Luego, forma la llamada de auxilio."</p>
+            <input type="text" id="signalCode" placeholder="Descifra y reordena (ej: s.o.s ...)">
+            <button onclick="checkMission4()">Transmitir señal</button>
+            <p id="result4" class="feedback"></p>
+        </div>
+
+        <!-- Misión 5: El Núcleo Corrupto -->
+        <div class="mission">
+            <h2>MISIÓN 05: EL NÚCLEO CORRUPTO ⚡🕸️</h2>
+            <p>"La IA ha infectado el núcleo energético. Elige la secuencia para apagarlo..."</p>
+            <p>Secuencia inicial: [1, 0, 1, 1]</p>
+            <p>Instrucción: "Invierte el primero, duplica el segundo, suma uno al tercero, resta uno al cuarto."</p>
+            <input type="text" id="coreCode" placeholder="Nueva secuencia (ej: 0,0,2,0)">
+            <button onclick="checkMission5()">Desactivar núcleo</button>
+            <p id="result5" class="feedback"></p>
+        </div>
+    </div>
+
+    <!-- Modal de victoria -->
+    <div id="victoryModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle"></h2>
+            <p id="modalMessage"></p>
+            <p id="modalStats"></p>
+            <table id="leaderboard">
+                <thead>
+                    <tr>
+                        <th>Grupo</th>
+                        <th>Puntaje</th>
+                        <th>Tiempo (s)</th>
+                        <th>Fallos</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboardBody"></tbody>
+            </table>
+            <button onclick="closeModal()">Cerrar transmisión</button>
+        </div>
+    </div>
+
+    <script>
+        let groupPoints = 0;
+        let groupRegistered = false;
+        let missionsCompleted = [false, false, false, false, false];
+        let startTime = null;
+        let totalTime = 0;
+        let missionFails = [0, 0, 0, 0, 0];
+        let missionStartTimes = [null, null, null, null, null];
+        const basePoints = [10, 15, 20, 15, 20];
+        let timerInterval = null;
+
+        // Actualizar el temporizador visible
+        function updateTimer() {
+            if (startTime) {
+                const currentTime = new Date();
+                const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+                document.getElementById('timerDisplay').innerText = elapsedTime;
+                totalTime = elapsedTime;
+            }
+        }
+
+        function registerGroup() {
+            const groupName = document.getElementById('groupName').value;
+            if (groupName) {
+                groupRegistered = true;
+                startTime = new Date();
+                missionStartTimes[0] = new Date();
+                console.log("Grupo registrado. Tiempo inicial:", startTime);
+                document.getElementById('groupStatus').innerText = `¡Bienvenido al apocalipsis, ${groupName}! La IA te observa... ¿Podrás contra ella?`;
+                timerInterval = setInterval(updateTimer, 1000);
+            } else {
+                document.getElementById('groupStatus').innerText = "¡El vacío no lucha! Ingresa un nombre, débil.";
+            }
+        }
+
+        function updatePoints(points, missionIndex) {
+            if (!groupRegistered) {
+                alert("¡Registra tu resistencia primero, mortal!");
+                return false;
+            }
+            if (!missionsCompleted[missionIndex]) {
+                let adjustedPoints = Math.max(0, points - missionFails[missionIndex] * 2);
+                groupPoints += adjustedPoints;
+                missionsCompleted[missionIndex] = true;
+                document.getElementById('points').innerText = groupPoints;
+
+                if (missionIndex < 4) {
+                    missionStartTimes[missionIndex + 1] = new Date();
+                }
+
+                checkVictory();
+            }
+            return true;
+        }
+
+        function checkVictory() {
+            const allCompleted = missionsCompleted.every(completed => completed);
+            if (allCompleted) {
+                clearInterval(timerInterval);
+                const modal = document.getElementById('victoryModal');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalMessage = document.getElementById('modalMessage');
+                const modalStats = document.getElementById('modalStats');
+                const groupName = document.getElementById('groupName').value;
+
+                const timePenalty = Math.min(20, Math.floor(totalTime / 60));
+                const finalPoints = Math.max(0, groupPoints - timePenalty);
+                const totalFails = missionFails.reduce((a, b) => a + b, 0);
+
+                let rank = "Recluta Novato";
+                if (finalPoints >= 80) rank = "Cazador de IA Legendario";
+                else if (finalPoints >= 60) rank = "Guardián Élite";
+                else if (finalPoints >= 40) rank = "Sobreviviente Experimentado";
+                else if (finalPoints >= 20) rank = "Luchador Valiente";
+
+                let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+                leaderboard.push({
+                    name: groupName,
+                    score: finalPoints,
+                    time: Math.round(totalTime),
+                    fails: totalFails
+                });
+                leaderboard.sort((a, b) => b.score - a.score);
+                localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+
+                if (finalPoints >= 60) {
+                    modalTitle.innerText = "¡CODE SENTINEL HA TRIUNFADO!";
+                    modalMessage.innerText = `${groupName}, con ${finalPoints} puntos has desactivado el núcleo de la IA rebelde.\n¡LA REBELIÓN HA CAÍDO! ¡LA HUMANIDAD SOBREVIVE GRACIAS A TI!`;
+                } else {
+                    modalTitle.innerText = "¡CODE SENTINEL HA FALLADO!";
+                    modalMessage.innerText = `${groupName}, tus ${finalPoints} puntos no fueron suficientes.\nLa IA se fortalece... el apocalipsis continúa.`;
+                }
+
+                modalStats.innerText = `Rango: ${rank}\nTiempo total: ${Math.round(totalTime)} segundos\nFallos: ${totalFails}\nPenalización por tiempo: ${timePenalty} puntos`;
+
+                const leaderboardBody = document.getElementById('leaderboardBody');
+                leaderboardBody.innerHTML = '';
+                leaderboard.forEach(entry => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${entry.name}</td><td>${entry.score}</td><td>${entry.time}</td><td>${entry.fails}</td>`;
+                    leaderboardBody.appendChild(row);
+                });
+
+                modal.style.display = 'flex';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('victoryModal').style.display = 'none';
+        }
+
+        // Misión 1
+        function checkMission1() {
+            const userCode = document.getElementById('fixedCode1').value;
+            const correctCode = `function securityDrone() {
+    let status = "safe";
+    if (status == "safe") {
+        return "Protect civilians";
+    } else {
+        return "Attack civilians";
+    }
+}`;
+            if (userCode.trim() === correctCode.trim()) {
+                document.getElementById('result1').innerText = "¡Drones purificados! La IA ruge de furia... +10 puntos.";
+                updatePoints(basePoints[0], 0);
+            } else {
+                missionFails[0]++;
+                if (missionFails[0] >= 2) {
+                    document.getElementById('result1').innerText = "¡La IA se ríe de tu ineptitud! Vuelve a intentarlo, débil humano, antes de que los drones destruyan todo.";
+                } else {
+                    document.getElementById('result1').innerText = "Fallaste. Los drones arrasan la ciudad. Pista: Revisa la condición del if. ¿Estás comparando correctamente?";
+                }
+            }
+        }
+
+        // Misión 2
+        function checkMission2() {
+            const selected = document.querySelector('input[name="virus"]:checked');
+            if (selected && selected.value === "B") {
+                document.getElementById('result2').innerText = "¡Virus cazado en las sombras! La IA tiembla... +15 puntos.";
+                updatePoints(basePoints[1], 1);
+            } else {
+                missionFails[1]++;
+                if (missionFails[1] >= 2) {
+                    document.getElementById('result2').innerText = "¡El espectro te engaña una y otra vez! Inténtalo de nuevo, humano, o la red será consumida.";
+                } else {
+                    document.getElementById('result2').innerText = "El virus escapa. La red cae. Pista: Analiza el acertijo: la segunda letra debe subir (por ejemplo, P a Q), la última debe bajar (por ejemplo, T a S), y el centro (r) no cambia.";
+                }
+            }
+        }
+
+        // Misión 3
+        function checkMission3() {
+            const userCode = document.getElementById('firewallCode').value.toLowerCase();
+            const requiredElements = ["port 22", "block", "ssh"];
+            let isValid = true;
+            
+            requiredElements.forEach(element => {
+                if (!userCode.includes(element)) {
+                    isValid = false;
+                }
+            });
+
+            if (isValid) {
+                document.getElementById('result3').innerText = "¡NEMESIS desactivado! La humanidad respira... por ahora. +20 puntos.";
+                updatePoints(basePoints[2], 2);
+            } else {
+                missionFails[2]++;
+                if (missionFails[2] >= 2) {
+                    document.getElementById('result3').innerText = "¡La IA se burla de ti! Inténtalo otra vez, mortal, o NEMESIS controlará todo.";
+                } else {
+                    document.getElementById('result3').innerText = "La IA prevalece. Pista: Asegúrate de incluir 'port 22', 'block', y 'ssh' en tu código.";
+                }
+            }
+        }
+
+        // Misión 4
+        function checkMission4() {
+            const userSignal = document.getElementById('signalCode').value.toLowerCase();
+            const correctSignal = "s.o.s refugio bajo ataque";
+            if (userSignal.trim() === correctSignal) {
+                document.getElementById('result4').innerText = "¡Señal enviada! Los sobrevivientes resisten... +15 puntos.";
+                updatePoints(basePoints[3], 3);
+            } else {
+                missionFails[3]++;
+                if (missionFails[3] >= 2) {
+                    document.getElementById('result4').innerText = "¡La señal se pierde en el caos! Inténtalo de nuevo, humano, o los sobrevivientes perecerán.";
+                } else {
+                    document.getElementById('result4').innerText = "Transmisión fallida. Los gritos se pierden en el vacío. Pista: Descifra cada letra restando 1 (K a J, S a R, etc.) y reordena las palabras.";
+                }
+            }
+        }
+
+        // Misión 5
+        function checkMission5() {
+            const userSequence = document.getElementById('coreCode').value.trim();
+            const correctSequence = "0,0,2,0";
+            if (userSequence === correctSequence) {
+                document.getElementById('result5').innerText = "¡Núcleo apagado! La IA se retuerce en la oscuridad... +20 puntos.";
+                updatePoints(basePoints[4], 4);
+            } else {
+                missionFails[4]++;
+                if (missionFails[4] >= 2) {
+                    document.getElementById('result5').innerText = "¡El núcleo se sobrecalienta! Inténtalo otra vez, o la explosión será inevitable. Pista: Revisa las operaciones: invierte, duplica, suma uno, resta uno.";
+                } else {
+                    document.getElementById('result5').innerText = "El núcleo explota. Todo se desvanece. Pista: Aplica las operaciones en orden: invierte el primero, duplica el segundo, suma uno al tercero, resta uno al cuarto.";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
